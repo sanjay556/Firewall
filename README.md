@@ -7,7 +7,7 @@ This is a script for setting up a firewall with settings for tarpitting ssh and 
 ```
 git clone https://github.com/sanjay556/firewall.git
 ````
-## Make the Rules Permanant
+## Make the Rules Permanent
 ### Debian-based Distributions
 ```
 sudo apt install iptables-persistent
