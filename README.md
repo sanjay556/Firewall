@@ -26,3 +26,17 @@ sudo iptables-save > /etc/iptables/iptables.rules
 sudo chkconfig iptables on
 sudo service iptables save
 ```
+
+
+
+## Using Port Redirection (iptables)
+You can use the Linux firewall to redirect incoming traffic from port 80 to a port your user can access (like 8080).
+
+    Redirect incoming traffic: 
+    sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+    Redirect local traffic (for testing on the same machine): 
+    sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+
+
