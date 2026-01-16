@@ -40,3 +40,15 @@ You can use the Linux firewall to redirect incoming traffic from port 80 to a po
 
 
 
+* Exposing port 14001 and having external IP and natting in Firewall-  from your server
+
+        iptables -t nat -A PREROUTING -p tcp --dport 14001 -j DNAT --to-destination <remoteServer>:14001
+        iptables -t nat -A POSTROUTING -p tcp -d <remoteServer> --dport 14001 -j MASQUERADE
+        iptables -A FORWARD -p tcp -d <remoteServer> --dport 14001 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+        iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+        OS,Save Command
+        Debian/Ubuntu,sudo /etc/init.d/netfilter-persistent save
+        Arch Linux,sudo iptables-save > /etc/iptables/iptables.rules
+        RHEL/CentOS,sudo service iptables save
+
